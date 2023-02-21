@@ -1,16 +1,13 @@
+using ceTe.DynamicPDF.Merger;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json;
 
 namespace PDFUpload.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("/api/printpdf")]
     public class WeatherForecastController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
-
         private readonly ILogger<WeatherForecastController> _logger;
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
@@ -18,16 +15,20 @@ namespace PDFUpload.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpGet("{pdfloc}/{jsonloc}")]
+        public async Task<ActionResult<string>> PrintPdf(string pdfloc,string jsonloc)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+            MergeDocument sourcepdf = new MergeDocument(@pdfloc);
+            var file = System.IO.File.ReadAllText(@jsonloc);
+            var data = JsonSerializer.Deserialize<Dictionary<string, string>>(file);
+
+            foreach (var (key, value) in data)
             {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+                sourcepdf.Form.Fields[key].Value = value;
+            }
+            //sourcepdf.Form.Fields["CheckBox1"].Value = "1";
+            sourcepdf.Draw(@"C:\Sai_Charan_Work\PrintPDF\Destination.pdf");
+            return "Success";
         }
     }
 }
