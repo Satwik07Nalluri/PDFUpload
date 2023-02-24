@@ -1,14 +1,14 @@
 {
-  "First Name": "User First Name 1",
-  "Last Name": "USer Last Name New",
+  "FirstName": "User First Name 1",
+  "LastName": "USer Last Name New",
   "Address": "Address goes here Old",
   "CityStateZip": "Hyderabad dfug",
-  "Home Phone 1": "9999785663",
-  "Cell Phone": "8888888888",
-  "Home Phone 2": "User@mail.com",
+  "HomePhone": "9999785663",
+  "CellPhone": "8888888888",
+  "Email": "User@mail.com",
   "money": "100000",
   "CheckBox1": "1",
   "CheckBox2": "1",
-  "I would like my donation applied toward 1": "Food",
-  "I would like my donation applied toward 2":  "Shelter"
+  "toward1": "Food",
+  "toward2":  "Shelter"
 }

@@ -28,6 +28,10 @@ namespace PDFUpload.Controllers
             await saveFile.save(pdf, pdf_new);
             await saveFile.save(json, json_new);
             MergeDocument sourcepdf = new MergeDocument(@pdf_new);
+            for(var i = 0;i<=0;i++)
+            {
+                sourcepdf.Append(pdf_new);
+            }
             var file = System.IO.File.ReadAllText(@json_new);
             var data = JsonSerializer.Deserialize<Dictionary<string, string>>(file);
 
