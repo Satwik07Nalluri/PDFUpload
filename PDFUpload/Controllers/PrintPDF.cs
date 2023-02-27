@@ -1,6 +1,7 @@
 using ceTe.DynamicPDF.Merger;
 using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
+using Newtonsoft.Json;
+
 
 namespace PDFUpload.Controllers
 {
@@ -28,12 +29,12 @@ namespace PDFUpload.Controllers
             await saveFile.save(pdf, pdf_new);
             await saveFile.save(json, json_new);
             MergeDocument sourcepdf = new MergeDocument(@pdf_new);
-            for(var i = 0;i<=0;i++)
+            for(var i = 0;i<=2;i++)
             {
                 sourcepdf.Append(pdf_new);
             }
             var file = System.IO.File.ReadAllText(@json_new);
-            var data = JsonSerializer.Deserialize<Dictionary<string, string>>(file);
+            var data = JsonConvert.DeserializeObject<Dictionary<string,string>>(file);
 
             var bytes = await System.IO.File.ReadAllBytesAsync(pdf_new);
             var returnValue = File(bytes, "application/pdf", destination_filename + ".pdf");
@@ -43,8 +44,8 @@ namespace PDFUpload.Controllers
                 foreach (var (key, value) in data)
                 {
                     sourcepdf.Form.Fields[key].Value = value;
-                }
-                string destpdf = Path.Combine(route, destination_filename + ".pdf");
+
+                }                string destpdf = Path.Combine(route, destination_filename + ".pdf");
                 sourcepdf.Draw(@destpdf);
                 bytes = await System.IO.File.ReadAllBytesAsync(destpdf);
                 returnValue = File(bytes, "application/pdf", Path.GetFileName(destpdf));
