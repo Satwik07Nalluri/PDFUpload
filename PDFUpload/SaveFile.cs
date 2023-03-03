@@ -13,9 +13,9 @@ namespace PDFUpload
             Directory.CreateDirectory(route);
 
             // Saving Pdf Files
-            for (var i = 1; i < 3; i++)
+            for (var i = 1; i < 4; i++)
             {
-                var pdf_loc = Path.Combine(route, $"1{Path.GetExtension(pdffile.FileName)}");
+                var pdf_loc = Path.Combine(route, $"{i}{Path.GetExtension(pdffile.FileName)}");
                 await save(pdffile, pdf_loc);
             }
 
