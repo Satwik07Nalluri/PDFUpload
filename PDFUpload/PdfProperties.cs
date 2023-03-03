@@ -15,12 +15,19 @@ namespace PDFUpload
 
         public PdfProperties(string folder)
         {
-            string jjj = System.IO.Path.Combine(folder, "data.json");
-            var file = System.IO.File.ReadAllText(jjj);
-            var data = JsonConvert.DeserializeObject<PdfProperties>(file);
-            Pdfprops = data.Pdfprops;
-            Watermark = data.Watermark;
-            Adobeversion = data.Adobeversion;
+            try
+            {
+                string json_array = System.IO.Path.Combine(folder, "data.json");
+                var file = System.IO.File.ReadAllText(json_array);
+                var data = JsonConvert.DeserializeObject<PdfProperties>(file);
+                Pdfprops = data.Pdfprops;
+                Watermark = data.Watermark;
+                Adobeversion = data.Adobeversion;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error Occured while extracting JSON file");
+            }
         }
 
         public List<Dictionary<string, string>> GetPdfprops()

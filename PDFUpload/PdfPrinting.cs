@@ -7,23 +7,34 @@ namespace PDFUpload
     {
         public async Task<string> multiplepdfprinting(IFormFile pdffile,string file_loc, PdfProperties pdfProperties)
         {
-            for (int i = 0; i < pdfProperties.Pdfprops.Count; i++)
+            try
             {
-                string pdf_loc = Path.Combine(file_loc, $"{i + 1}{Path.GetExtension(pdffile.FileName)}");
-                SaveFile saving = new SaveFile();
-                await saving.save(pdffile, pdf_loc);
-            }
-            for (int i = 0; i < pdfProperties.Pdfprops.Count; i++)
-            {
-                string pdfloc = Path.Combine(file_loc, $"{i + 1}{Path.GetExtension(pdffile.FileName)}");
-                MergeDocument source= new MergeDocument(@pdfloc);
-                foreach (var (k, v) in pdfProperties.GetPdfpropsofPage(i+1))
+                //Creating individual PDFs
+                for (int i = 0; i < pdfProperties.Pdfprops.Count; i++)
                 {
-                    source.Form.Fields[k].Value = v;
+                    string pdf_loc = Path.Combine(file_loc, $"{i + 1}{Path.GetExtension(pdffile.FileName)}");
+                    SaveFile saving = new SaveFile();
+                    await saving.save(pdffile, pdf_loc);
                 }
-                source.Draw(pdfloc);
+
+                //Writing Data to individual PDFs
+                for (int i = 0; i < pdfProperties.Pdfprops.Count; i++)
+                {
+                    string pdfloc = Path.Combine(file_loc, $"{i + 1}{Path.GetExtension(pdffile.FileName)}");
+                    MergeDocument source = new MergeDocument(@pdfloc);
+                    foreach (var (k, v) in pdfProperties.GetPdfpropsofPage(i + 1))
+                    {
+                        source.Form.Fields[k].Value = v;
+                    }
+                    source.Draw(pdfloc);
+                }
+                return "Success";
             }
-            return "Success";
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error Occured while Printing Individual PDFs");
+                return "Unsuccessful";
+            }
         }
     }
 }
