@@ -24,6 +24,7 @@ namespace PDFUpload
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Error Occured while creating Temporary folder");
                 return "Unsuccessful";
             }
@@ -43,6 +44,7 @@ namespace PDFUpload
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Error Occured while creating File Stream");
                 return "Unsuccessful";
             }

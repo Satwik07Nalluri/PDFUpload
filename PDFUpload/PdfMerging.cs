@@ -20,6 +20,7 @@ namespace PDFUpload
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Error Occured while Merging the PDFs");
             }
         }

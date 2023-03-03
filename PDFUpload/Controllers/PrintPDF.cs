@@ -52,6 +52,7 @@ namespace PDFUpload.Controllers
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Error Occured while converting final pdf to bytes");
                 return NotFound();
             }

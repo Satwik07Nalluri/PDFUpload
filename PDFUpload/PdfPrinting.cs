@@ -32,6 +32,7 @@ namespace PDFUpload
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
                 Console.WriteLine("Error Occured while Printing Individual PDFs");
                 return "Unsuccessful";
             }
