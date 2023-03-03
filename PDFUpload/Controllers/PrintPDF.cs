@@ -39,20 +39,17 @@ namespace PDFUpload.Controllers
 
 
             // Printing Data Extracted to Single Page Pdfs in files_loc folder
-            for(int i=1; i <= 3;i++)
-            {
-                foreach(var (k,v) in pdfProperties.GetPdfpropsofPage(i))
-                {
-                    Console.WriteLine($"{k} is {v}");
-                }
-            }
+            //for(int i=1; i <= 3;i++)
+            //{
+                //foreach(var (k,v) in pdfProperties.GetPdfpropsofPage(i))
+                //{
+                    //Console.WriteLine($"{k} is {v}");
+                //}
+            //}
 
             // Merging Pdfs and Deleting Temp Folder and get File as return value
-
-
-
-
-
+            PdfPrinting pdfprint= new PdfPrinting();
+            pdfprint.multiplepdfprinting(pdf, files_loc, pdfProperties);
 
             //return File
             return Ok("Success");
