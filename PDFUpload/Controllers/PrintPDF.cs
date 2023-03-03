@@ -1,7 +1,4 @@
-using ceTe.DynamicPDF.Merger;
-using ceTe.DynamicPDF.PageElements;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
 
 
 namespace PDFUpload.Controllers
@@ -23,7 +20,7 @@ namespace PDFUpload.Controllers
             string? currentRoute = System.IO.Directory.GetCurrentDirectory();
 
             // Folder that holds all temporary folders
-            string? tempFolderRoute = System.IO.Path.Combine(currentRoute, "TemporaryFodlers");
+            string? tempFolderRoute = System.IO.Path.Combine(currentRoute, "TemporaryFolders");
             if(!Directory.Exists(tempFolderRoute))
             {
                 Directory.CreateDirectory(tempFolderRoute);
@@ -39,43 +36,18 @@ namespace PDFUpload.Controllers
 
 
             // Printing Data Extracted to Single Page Pdfs in files_loc folder
-            //for(int i=1; i <= 3;i++)
-            //{
-                //foreach(var (k,v) in pdfProperties.GetPdfpropsofPage(i))
-                //{
-                    //Console.WriteLine($"{k} is {v}");
-                //}
-            //}
+            PdfPrinting pdfprint = new PdfPrinting();
+            await pdfprint.multiplepdfprinting(pdf, files_loc, pdfProperties);
 
-            // Merging Pdfs and Deleting Temp Folder and get File as return value
-            PdfPrinting pdfprint= new PdfPrinting();
-            pdfprint.multiplepdfprinting(pdf, files_loc, pdfProperties);
+            //Merging PDFs
+            PdfMerging merging = new PdfMerging();
+            merging.Mergepdf(files_loc, pdfProperties);
 
-            //return File
-            return Ok("Success");
-            //MergeDocument sourcepdf = new MergeDocument(@pdf_new);
-            //var file = System.IO.File.ReadAllText(@json_new);
-            //var data = JsonConvert.DeserializeObject<Dictionary<string,string>>(file);
+            // COnvert pdf file to bytes
+            var bytes = await System.IO.File.ReadAllBytesAsync(System.IO.Path.Combine(files_loc, "destpdf.pdf"));
+            Directory.Delete(files_loc, true);
 
-            //var bytes = await System.IO.File.ReadAllBytesAsync(pdf_new);
-            //var returnValue = File(bytes, "application/pdf", destination_filename + ".pdf");
-
-            //if (data is not null)
-            //{
-            //    foreach (var (key, value) in data)
-            //    {
-            //        sourcepdf.Form.Fields[key].Value = value;
-
-            //    }                string destpdf = Path.Combine(route, destination_filename + ".pdf");
-            //    sourcepdf.Draw(@destpdf);
-            //    bytes = await System.IO.File.ReadAllBytesAsync(destpdf);
-             //returnValue = File(bytes, "application/pdf", Path.GetFileName(destpdf));
-            //    System.IO.File.Delete(@pdf_new);
-            //    System.IO.File.Delete(@json_new);
-            //    System.IO.File.Delete(destpdf);
-            //}
-            //return returnValue;
-
+            return File(bytes, "application/pdf", "Output.pdf");
         }
     }
 }
