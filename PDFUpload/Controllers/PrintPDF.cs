@@ -69,7 +69,7 @@ namespace PDFUpload.Controllers
             //    }                string destpdf = Path.Combine(route, destination_filename + ".pdf");
             //    sourcepdf.Draw(@destpdf);
             //    bytes = await System.IO.File.ReadAllBytesAsync(destpdf);
-            //    returnValue = File(bytes, "application/pdf", Path.GetFileName(destpdf));
+             //returnValue = File(bytes, "application/pdf", Path.GetFileName(destpdf));
             //    System.IO.File.Delete(@pdf_new);
             //    System.IO.File.Delete(@json_new);
             //    System.IO.File.Delete(destpdf);
