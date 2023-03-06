@@ -4,10 +4,13 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationInsightsResourceId>/subscriptions/10aa1086-5180-4583-bc8d-b749d30f59eb/resourceGroups/insights/providers/microsoft.insights/components/insightdemo</ApplicationInsightsResourceId>
+    <UserSecretsId>fd57d531-a930-4701-9ac8-5008f3583508</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="ceTe.DynamicPDF.CoreSuite.NET" Version="11.41.0" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>

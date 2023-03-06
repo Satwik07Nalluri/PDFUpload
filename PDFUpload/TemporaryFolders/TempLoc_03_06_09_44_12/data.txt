@@ -1,0 +1,16 @@
+using Azure.Storage.Blobs;
+
+string connectionString = "DefaultEndpointsProtocol=https;AccountName=pdfexample;AccountKey=QWOMxuJphpfNdO4WcLfYVIsvbRYLVFFkgh4AYqnMvvdQHRZLg31pxV5T0z+TrRPc/3oKn/0rU23l+ASt4R02bQ==;EndpointSuffix=core.windows.net";
+string containerName = "xyz";
+//string blobName = "OutputPdf.pdf";
+//string filePath = "C:\\pdf-example\\OutputPdf.pdf";
+
+BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
+await blobServiceClient.CreateBlobContainerAsync(containerName, Azure.Storage.Blobs.Models.PublicAccessType.Blob);
+//BlobContainerClient blobContainerClient = new BlobContainerClient(connectionString, containerName);
+
+//BlobClient blobClient = blobContainerClient.GetBlobClient(blobName);
+//await blobClient.UploadAsync(filePath, true);
+
+Console.WriteLine("Blob created");
+//Console.WriteLine("Blob uploaded");

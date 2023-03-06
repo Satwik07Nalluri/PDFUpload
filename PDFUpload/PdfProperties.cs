@@ -27,7 +27,8 @@ namespace PDFUpload
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.WriteLine("Error Occured while extracting JSON file");
+                //Console.WriteLine("Error Occured while extracting JSON file");
+               Console.WriteLine("Upload the correct format file");
             }
         }
 

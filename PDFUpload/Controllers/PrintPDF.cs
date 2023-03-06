@@ -20,12 +20,13 @@ namespace PDFUpload.Controllers
             {
                 // Getting Path for the file
                 string? currentRoute = System.IO.Directory.GetCurrentDirectory();
-
+                _logger.LogInformation($"Path for the file is created");
                 // Folder that holds all temporary folders
                 string? tempFolderRoute = System.IO.Path.Combine(currentRoute, "TemporaryFolders");
                 if(!Directory.Exists(tempFolderRoute))
                 {
                     Directory.CreateDirectory(tempFolderRoute);
+                    _logger.LogInformation($"Directory is created if doesnot exists in the tempFolderRoute");
                 }
 
                 // Creating Object of SaveFile Class that helps us to save files at a given location
@@ -53,7 +54,7 @@ namespace PDFUpload.Controllers
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.WriteLine("Error Occured while converting final pdf to bytes");
+                _logger.LogError("Error Occured while converting final pdf to bytes");
                 return NotFound();
             }
         }

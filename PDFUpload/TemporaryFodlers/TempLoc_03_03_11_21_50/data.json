@@ -1,0 +1,39 @@
+{
+  "Pdfprops": [
+    {
+      "FirstName": "Charan",
+      "LastName": "Gouni",
+      "Address": "Patanceru",
+      "CityStateZip": "Medchal",
+      "HomePhone": "9999999999",
+      "CellPhone": "8888888888",
+      "Email": "charan@mail.com",
+      "money": "100000",
+      "CheckBox1": "1"
+    },
+    {
+      "FirstName": "Charan 2",
+      "LastName": "Gouni 2",
+      "Address": "Patanceru 2",
+      "CityStateZip": "Medchal 2",
+      "HomePhone": "9999999999",
+      "CellPhone": "8888888888",
+      "Email": "charan@mail.com",
+      "money": "100000",
+      "CheckBox1": "1"
+    },
+    {
+      "FirstName": "Charan 3",
+      "LastName": "Gouni 3",
+      "Address": "Patanceru 3",
+      "CityStateZip": "Medchal 3",
+      "HomePhone": "9999999999",
+      "CellPhone": "8888888888",
+      "Email": "charan@mail.com",
+      "money": "100000",
+      "CheckBox1": "1"
+    }
+  ],
+  "Watermark": "sample",
+  "Adobeversion": "1"
+}
